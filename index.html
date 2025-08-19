@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddeshwar Sholapur - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 2rem 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Home Section */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            color: white;
+        }
+
+        .home-content {
+            flex: 1;
+        }
+
+        .home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .home p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .home-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .projects h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .project-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: white;
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success {
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: -10px;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: start;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .home {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .home h1 {
+                font-size: 2.5rem;
+            }
+
+            .profile-pic {
+                width: 250px;
+                height: 250px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 1rem 30px;
+            }
+
+            .about, .projects, .contact {
+                margin: 1rem;
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Siddeshwar Sholapur</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="home-content">
+            <h1>Hi, I'm Siddeshwar Sholapur</h1>
+            <p>Front-End Developer passionate about creating innovative web solutions and bringing ideas to life through clean, efficient code.</p>
+            <a href="#projects" class="btn">View My Work</a>
+            <a href="#" class="siddheshwar sholapur" id="https://sidhcv.tiiny.site" style="margin-left: 1rem;">Download Resume</a>
+        </div>
+        <div class="home-image">
+            <img width="400" height="400" src="chintu.jpg" alt="Siddeshwar Sholapur>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm a passionate Front-End Developer with creating web applications that solve real-world problems. I love working with modern technologies and am always eager to learn new skills.</p>
+                
+                <h3 style="margin-top: 2rem; color: #667eea;">Education</h3>
+                <p><strong>Bachelor of Computer Applications</strong><br>
+                osmania University  (2021-2024)<br>
+                GPA: 7.84</p>
+
+                <h3 style="margin-top: 2rem; color: #667eea;">Experience</h3>
+                <p><strong>Front-End  Developer</strong>
+                    <br>Unified Mentor (2025-Present)<br>
+                •      <br>
+                •      </p>
+            </div>
+            
+            <div>
+                <h3 style="color: #667eea; margin-bottom: 1rem;">Skills</h3>
+                <div class="skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React.Js</span>
+                    <span class="skill-tag">Node.Js</span>
+                    <span class="skill-tag">Vue.Js</span>
+                    <span class="skill-tag">Ms-Office</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">Git&GitHub</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+
+                <h3 style="color: #667eea; margin: 2rem 0 1rem;">Hobbies</h3>
+                <p>When I'm not coding, I enjoy photography, Traveling, learning new languages, and contributing to open-source projects. I also love playing cricket .</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card" onclick="openProjectModal('E-Commerce Platform')">
+                <div class="project-image">🛒 E-Commerce Platform</div>
+                <div class="project-info">
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-stack e-commerce application built with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.</p>
+                    <div class="skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('Weather App')">
+                <div class="project-image">🌤️ Weather Dashboard</div>
+                <div class="project-info">
+                    <h3>Weather Dashboard</h3>
+                    <p>A responsive weather application that provides real-time weather data and forecasts. Built with vanilla JavaScript and external weather APIs.</p>
+                    <div class="skills">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">API Integration</span>
+                        <span class="skill-tag">CSS3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openProjectModal('Task Manager')">
+                <div class="project-image">📋 Task Manager</div>
+                <div class="project-info">
+                    <h3>Task Management App</h3>
+                    <p>A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.</p>
+                    <div class="skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Socket.io</span>
+                        <span class="skill-tag">Express</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Get In Touch</h2>
+        <div id="success-message" class="success">
+            Thank you for your message! I'll get back to you soon.
+        </div>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error" id="nameError">Please enter your name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error" id="emailError">siddharthsholapur@gmail.com</div>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject *</label>
+                <input type="text" id="subject" name="subject" required>
+                <div class="error" id="subjectError">Please enter a subject</div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required></textarea>
+                <div class="error" id="messageError">Please enter your message</div>
+            </div>
+
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle">Project Details</h3>
+            <p id="modalContent">Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active navigation
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Mobile hamburger menu
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Scroll spy for active navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Contact form validation and submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form elements
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const subject = document.getElementById('subject');
+            const message = document.getElementById('message');
+            
+            // Clear previous errors
+            document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+            
+            let isValid = true;
+            
+            // Validate name
+            if (!name.value.trim()) {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim() || !emailRegex.test(email.value)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate subject
+            if (!subject.value.trim()) {
+                document.getElementById('subjectError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate message
+            if (!message.value.trim()) {
+                document.getElementById('messageError').style.display = 'block';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show success message
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 5000);
+            }
+        });
+
+        // Project modal functionality
+        const modal = document.getElementById('projectModal');
+        const closeModal = document.querySelector('.close');
+        
+        function openProjectModal(projectName) {
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = projectName;
+            
+            // Project details
+            const projectDetails = {
+                'E-Commerce Platform': 'This comprehensive e-commerce platform features user authentication, product catalog, shopping cart, secure payment processing with Stripe, order management, and an admin dashboard. Built with React for the frontend, Node.js/Express for the backend, and MongoDB for data storage.',
+                'Weather App': 'A responsive weather dashboard that provides current weather conditions, 5-day forecasts, and weather alerts. Features location-based weather data, search functionality, and beautiful weather visualizations. Built with vanilla JavaScript and integrates with OpenWeatherMap API.',
+                'Task Manager': 'A collaborative task management application with real-time updates using Socket.io. Features include drag-and-drop task organization, team collaboration, file attachments, due date reminders, and progress tracking. Built with React, Express, and MongoDB.'
+            };
+            
+            modalContent.textContent = projectDetails[projectName] || 'Project details coming soon...';
+            modal.style.display = 'block';
+        }
+        
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Resume download functionality
+        document.getElementById('resumeBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Create a mock PDF download
+            const link = document.createElement('a');
+            link.download = 'Siddeshwar Sholapur_Resume.pdf';
+            link.href="https://sidhcv.tiiny.site"
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show notification
+            alert('Resume download started! (This is a demo - in a real portfolio, this would download your actual resume PDF)');
+        });
+
+        // Add some interactive animations
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Typing animation for the home section
+        const text = "Front-End Developer passionate about creating innovative web solutions and bringing ideas to life through clean, efficient code.";
+        const homeP = document.querySelector('.home p');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                homeP.textContent = text.slice(0, index + 1);
+                index++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+
+        // Start typing animation when page loads
+        window.addEventListener('load', () => {
+            homeP.textContent = '';
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>
